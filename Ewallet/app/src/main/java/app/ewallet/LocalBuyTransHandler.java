@@ -35,7 +35,7 @@ public class LocalBuyTransHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_BUY + "(" +
-                  "INTEGER PRIMARY KEY," +   //MUST MAKE BUY TRANSACTION ID AUTO INCREMENT. T.T
+                  KEY_ID_TRANSACTION + " INTEGER PRIMARY KEY," +   //MUST MAKE BUY TRANSACTION ID AUTO INCREMENT. T.T
                   KEY_TS_TRANSACTION + " DATETIME," +
                   KEY_ID_NUMBER + " INT," +
                   KEY_ID_SHOPTERMINAL + " TEXT" + ")";
@@ -65,6 +65,7 @@ public class LocalBuyTransHandler extends SQLiteOpenHelper {
         onCreate(db);
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID_TRANSACTION, bt.getTimeStamp());
         values.put(KEY_TS_TRANSACTION, bt.getTimeStamp()); //2nd col
         values.put(KEY_ID_NUMBER, bt.getIDNum()); //3rd col
         values.put(KEY_ID_SHOPTERMINAL, bt.getShopID());

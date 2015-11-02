@@ -386,8 +386,9 @@ public class MainActivity extends ActionBarActivity {
 
                         BuyTransaction tempBT = btdb.getBuyTransaction(i);
                         jo = new JSONObject();
+                        jo.put("buy_transaction_id", tempBT.getTransID());
                         jo.put("buy_transaction_ts", tempBT.getTimeStamp());
-                    jo.put("id_number", tempBT.getIDNum());
+                        jo.put("id_number", tempBT.getIDNum());
                         jo.put("shop_terminal_id", tempBT.getShopID());
                         i++;
                         ja.put(jo);
@@ -412,9 +413,9 @@ public class MainActivity extends ActionBarActivity {
                             @Override
                             public void run() {
                                 EditText et = (EditText) findViewById(R.id.qty_editText3);
-                                //et.setText((new String(responseBody)));
+                                et.setText((new String(responseBody)));
                                 EditText itemEt4 = (EditText) findViewById(R.id.item_editText4);
-                                //itemEt4.setText(ja.toString());
+                                itemEt4.setText(ja.toString());
 
                             }
                         });
@@ -458,9 +459,9 @@ public class MainActivity extends ActionBarActivity {
                         @Override
                         public void run() {
                             EditText et = (EditText) findViewById(R.id.qty_editText3);
-                            et.setText((new String(responseBody)));
+                         //   et.setText((new String(responseBody)));
                             EditText itemEt4 = (EditText) findViewById(R.id.item_editText4);
-                            itemEt4.setText(ja1.toString());
+                         //   itemEt4.setText(ja1.toString());
 
                         }
                     });
