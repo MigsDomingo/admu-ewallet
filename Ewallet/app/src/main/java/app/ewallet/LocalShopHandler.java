@@ -42,7 +42,7 @@ public class LocalShopHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_SHOP + "(" +
+        String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_SHOP + "(" +
                 KEY_ITEM_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," +
                 KEY_COST + " NUM," +
                 KEY_QTY + " INT" + ")";

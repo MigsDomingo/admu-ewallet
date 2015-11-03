@@ -81,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
 
+
         /**
          * Stub constructors for hard coded inner database for the ff:
          */
@@ -380,13 +381,13 @@ public class MainActivity extends ActionBarActivity {
              */
                 final JSONArray ja = new JSONArray();
                 JSONObject jo;
-                int i = 10;
+                int i = 10010;
             try {
                 while (btdb.checkExist(i)) {
 
                         BuyTransaction tempBT = btdb.getBuyTransaction(i);
                         jo = new JSONObject();
-                        jo.put("buy_transaction_id", tempBT.getTransID());
+                        jo.put("buy_transaction_id", tempBT.getTransID()); //must parse store number here at the start
                         jo.put("buy_transaction_ts", tempBT.getTimeStamp());
                         jo.put("id_number", tempBT.getIDNum());
                         jo.put("shop_terminal_id", tempBT.getShopID());
@@ -404,8 +405,18 @@ public class MainActivity extends ActionBarActivity {
 
             requestHandle = client.post(urlSync, params, new AsyncHttpResponseHandler() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    public void onSuccess(int statusCode, Header[] headers, final byte[] responseBody) {
                         //never called
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                EditText et = (EditText) findViewById(R.id.qty_editText3);
+                                //et.setText((new String(responseBody)));
+                                EditText itemEt4 = (EditText) findViewById(R.id.item_editText4);
+                                itemEt4.setText(ja.toString());
+
+                            }
+                        });
                     }
                     @Override
                     public void onFailure(int statusCode, Header[] headers, final byte[] responseBody, Throwable error) {
@@ -413,7 +424,7 @@ public class MainActivity extends ActionBarActivity {
                             @Override
                             public void run() {
                                 EditText et = (EditText) findViewById(R.id.qty_editText3);
-                                et.setText((new String(responseBody)));
+                                //et.setText((new String(responseBody)));
                                 EditText itemEt4 = (EditText) findViewById(R.id.item_editText4);
                                 itemEt4.setText(ja.toString());
 

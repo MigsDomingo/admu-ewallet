@@ -42,6 +42,7 @@ public class LocalitemOrder extends SQLiteOpenHelper {
 
     public void addItemOrder(ItemOrder itemOrder) {
         SQLiteDatabase db = getWritableDatabase();
+        onCreate(db);
 
         ContentValues values = new ContentValues();
         values.put(KEY_ID_BUYTRANSACTION, itemOrder.getBuyTransID()); //1st col
